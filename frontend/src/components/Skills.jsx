@@ -23,32 +23,34 @@ const skills = [
 
 function Skills() {
   return (
-    <section id="skills" className="py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="skills" className="border-t">
+      <div className="mx-auto max-w-6xl px-6 py-20">
+        
+        <div className="mb-10">
+          <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            Skills
+          </p>
 
-        <p className="text-sm font-medium text-muted-foreground">
-          Skills
-        </p>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Technologies I work with
+          </h2>
+        </div>
 
-        <h2 className="mt-2 text-3xl font-bold tracking-tight">
-          Technologies I work with
-        </h2>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((group) => (
             <div
               key={group.category}
-              className="rounded-xl border p-6"
+              className="rounded-xl border p-5 transition-shadow hover:shadow-sm"
             >
-              <h3 className="font-semibold">
+              <h3 className="mb-4 font-semibold">
                 {group.category}
               </h3>
 
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="rounded-md bg-muted px-3 py-1 text-sm"
+                    className="rounded-md bg-muted px-3 py-1.5 text-sm"
                   >
                     {skill}
                   </span>

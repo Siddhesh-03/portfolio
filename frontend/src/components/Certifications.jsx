@@ -18,38 +18,38 @@ const certifications = [
 
 function Certifications() {
   return (
-    <section id="certifications" className="py-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="certifications" className="border-t">
+      <div className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-10">
+          <p className="mb-2 text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            Certifications
+          </p>
 
-        <p className="text-sm font-medium text-muted-foreground">
-          Certifications
-        </p>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Learning and credentials
+          </h2>
+        </div>
 
-        <h2 className="mt-2 text-3xl font-bold tracking-tight">
-          Continuous learning
-        </h2>
-
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {certifications.map((certificate) => (
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {certifications.map((certification) => (
             <div
-              key={certificate.name}
-              className="rounded-xl border p-6"
+              key={certification.name}
+              className="rounded-xl border p-5 transition-shadow hover:shadow-sm"
             >
               <h3 className="font-semibold">
-                {certificate.name}
+                {certification.name}
               </h3>
 
-              <p className="mt-2 text-muted-foreground">
-                {certificate.issuer}
+              <p className="mt-2 text-sm text-muted-foreground">
+                {certification.issuer}
               </p>
 
-              <p className="mt-4 text-sm text-muted-foreground">
-                {certificate.date}
+              <p className="mt-4 text-xs text-muted-foreground">
+                {certification.date}
               </p>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
