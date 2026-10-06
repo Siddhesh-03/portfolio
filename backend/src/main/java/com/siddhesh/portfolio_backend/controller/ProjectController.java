@@ -5,7 +5,8 @@ import com.siddhesh.portfolio_backend.model.Project;
 import com.siddhesh.portfolio_backend.service.ProjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.siddhesh.portfolio_backend.dto.ProjectRequest;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,42 +28,39 @@ public class ProjectController {
     // GET /api/projects/{id}
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable String id) {
-        return projectService.getProjectById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Project project = projectService.getProjectById(id);
+
+        return ResponseEntity.ok(project);
     }
+
 
     // POST /api/projects
     @PostMapping
-    public ResponseEntity<Project> createProject(@RequestBody Project project) {
-        Project createdProject = projectService.createProject(project);
+    public ResponseEntity<Project> createProject(
+        @Valid @RequestBody ProjectRequest request
+    ) {
+        Project createdProject = projectService.createProject(request);
 
         return ResponseEntity
-                .status(201)
-                .body(createdProject);
+            .status(201)
+            .body(createdProject);
     }
 
     // PUT /api/projects/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<Project> updateProject(
+        public ResponseEntity<Project> updateProject(
             @PathVariable String id,
-            @RequestBody Project project
+            @Valid @RequestBody ProjectRequest request
     ) {
-        try {
-            Project updatedProject = projectService.updateProject(id, project);
-            return ResponseEntity.ok(updatedProject);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        Project updatedProject = projectService.updateProject(id, request);
+
+        return ResponseEntity.ok(updatedProject);
     }
+
 
     // DELETE /api/projects/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable String id) {
-        if (projectService.getProjectById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
         projectService.deleteProject(id);
 
         return ResponseEntity.noContent().build();
